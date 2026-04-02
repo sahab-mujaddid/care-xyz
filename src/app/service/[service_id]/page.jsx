@@ -1,5 +1,6 @@
 "use client";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 const services = [
@@ -32,6 +33,8 @@ const services = [
 export default function ServiceDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const { data: session } = useSession();
+  const isLogin = !!session;
 
   const serviceId = parseInt(params.service_id, 10);
   const service = services.find((s) => s.id === serviceId);
@@ -40,15 +43,11 @@ export default function ServiceDetailPage() {
     return <p className="text-center mt-10">Service not found.</p>;
   }
 
-  // Replace with actual login state (e.g. from NextAuth session)
-  const isLogin = false; 
-  const path = usePathname();
-
   const add2book = () => {
     if (isLogin) {
-      router.push(`/booking/${service.id}`); // ✅ dynamic booking route
+      router.push(`/booking/${service.id}`);
     } else {
-      router.push(`/login?callbackUrl=${path}`);
+      router.push(`/login?callbackUrl=/booking/${service.id}`);
     }
   };
 
@@ -65,7 +64,7 @@ export default function ServiceDetailPage() {
       <p className="text-lg text-gray-700 mb-6">{service.details}</p>
 
       <button className="btn btn-primary" onClick={add2book}>
-        Book Service
+        {isLogin ? "Book Service" : "Login to Book"}
       </button>
     </div>
   );

@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const params = useSearchParams();
 
   const handleChange = (e) => {
     setFormData({
@@ -22,17 +24,18 @@ export default function LoginPage() {
       return;
     }
 
+    // ✅ Use callbackUrl from query string if present
+    const callbackUrl = params.get("callbackUrl") || "/";
+
     const res = await signIn("credentials", {
       email: formData.email,
       password: formData.password,
-      callbackUrl: "/", // redirect after login
-      redirect: false,  // prevent auto redirect so we can handle errors
+      callbackUrl,   // dynamic redirect target
+      redirect: true // let NextAuth handle the redirect
     });
 
     if (res?.error) {
       setError("Invalid email or password.");
-    } else {
-      window.location.href = res.url; // manual redirect
     }
   };
 
@@ -71,7 +74,7 @@ export default function LoginPage() {
         />
 
         {/* Error message */}
-        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+        {error && <p className="text-error text-sm mt-2">{error}</p>}
 
         {/* Login button */}
         <button type="submit" className="btn btn-neutral w-full mt-4">
@@ -83,7 +86,9 @@ export default function LoginPage() {
         <button
           type="button"
           className="btn btn-outline w-full"
-          onClick={() => signIn("google", { callbackUrl: "/" })}
+          onClick={() =>
+            signIn("google", { callbackUrl: params.get("callbackUrl") || "/" })
+          }
         >
           Continue with Google
         </button>
