@@ -10,7 +10,7 @@ const Navbar = () => {
     <li><Link href={'/'}>Home</Link></li>
     <li><Link href={'/service'}>Services</Link></li>
     {/* <li><Link href={'/find-caretakers'}>Find Caretaker</Link></li> */}
-    <li><Link href={'/'}>About us</Link></li>
+    <li><Link href={'/my-bookings'}>My Bookings</Link></li>
     
     </>
     return (

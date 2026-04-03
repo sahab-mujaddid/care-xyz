@@ -6,7 +6,7 @@ const dbName = process.env.DB_NAME;
 let client;
 let clientPromise;
 
-// ✅ Single clean connect function
+
 export async function connect(collectionName) {
   if (!clientPromise) {
     client = new MongoClient(uri, {

@@ -16,7 +16,7 @@ const RegisterPage = () => {
   });
   const [error, setError] = useState("");
 
-  // Password validation: 6+ chars, 1 uppercase, 1 lowercase
+  
   const validatePassword = (password) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     return regex.test(password);
@@ -59,7 +59,7 @@ const RegisterPage = () => {
 
       setError("");
 
-      // ✅ Auto login after successful registration
+  
       const loginRes = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
@@ -68,9 +68,9 @@ const RegisterPage = () => {
 
       if (loginRes?.error) {
         setError("Registration succeeded, but login failed.");
-        router.push("/login"); // fallback
+        router.push("/login"); 
       } else {
-        router.push("/"); // redirect to home or dashboard
+        router.push("/"); 
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");

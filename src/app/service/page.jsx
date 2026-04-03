@@ -27,32 +27,38 @@ export default function ServiceListPage() {
   const router = useRouter();
 
   return (
-    <div className="space-y-16">
-      {services.map((service) => (
+    <div className="space-y-20 max-w-6xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-extrabold text-center text-primary mb-12">
+        Our Care Services
+      </h1>
+
+      {services.map((service, index) => (
         <div
           key={service.id}
-          className="flex justify-between items-center flex-col md:flex-row"
+          className={`flex flex-col md:flex-row items-center gap-10 ${
+            index % 2 === 1 ? "md:flex-row-reverse" : ""
+          }`}
         >
-          {/* Image Side */}
+         
           <div className="flex-1 flex justify-center">
             <img
               alt={service.title}
               src={service.image}
               width={500}
               height={400}
-              className="rounded-lg"
+              className="rounded-xl shadow-lg transform hover:scale-105 transition duration-300"
             />
           </div>
 
-          {/* Text Side */}
-          <div className="flex-1 space-y-5 mt-6 md:mt-0">
-            <h2 className="text-5xl font-bold text-primary">{service.title}</h2>
-            <p>{service.description}</p>
+        
+          <div className="flex-1 space-y-5 text-center md:text-left">
+            <h2 className="text-3xl font-bold text-primary">{service.title}</h2>
+            <p className="text-gray-600 text-lg">{service.description}</p>
             <button
-              className="btn btn-primary btn-outline"
+              className="btn btn-primary btn-wide shadow-md hover:shadow-xl transition"
               onClick={() => router.push(`/service/${service.id}`)}
             >
-              Service details
+              View Details
             </button>
           </div>
         </div>

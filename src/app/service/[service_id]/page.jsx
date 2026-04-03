@@ -40,7 +40,7 @@ export default function ServiceDetailPage() {
   const service = services.find((s) => s.id === serviceId);
 
   if (!service) {
-    return <p className="text-center mt-10">Service not found.</p>;
+    return <p className="text-center mt-10 text-red-500">Service not found.</p>;
   }
 
   const add2book = () => {
@@ -52,20 +52,38 @@ export default function ServiceDetailPage() {
   };
 
   return (
-    <div className="container mx-auto px-6 py-10">
-      <h2 className="text-4xl font-bold text-primary mb-6">{service.title}</h2>
-      <img
-        src={service.image}
-        alt={service.title}
-        width={500}
-        height={400}
-        className="rounded-lg mb-6"
-      />
-      <p className="text-lg text-gray-700 mb-6">{service.details}</p>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-6">
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+        {/* Title */}
+        <h2 className="text-4xl font-extrabold text-primary mb-6 text-center">
+          {service.title}
+        </h2>
 
-      <button className="btn btn-primary" onClick={add2book}>
-        {isLogin ? "Book Service" : "Login to Book"}
-      </button>
+        {/* Image */}
+        <div className="flex justify-center mb-8">
+          <img
+            src={service.image}
+            alt={service.title}
+            width={500}
+            height={400}
+            className="rounded-xl shadow-lg transform hover:scale-105 transition duration-300"
+          />
+        </div>
+
+        
+        <p className="text-lg text-gray-700 leading-relaxed mb-8 text-center md:text-left">
+          {service.details}
+        </p>
+
+        <div className="flex justify-center">
+          <button
+            className="btn btn-primary btn-wide shadow-md hover:shadow-xl transition-transform hover:scale-105"
+            onClick={add2book}
+          >
+            {isLogin ? "Book Service" : "Login to Book"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

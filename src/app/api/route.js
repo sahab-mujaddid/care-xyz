@@ -2,7 +2,7 @@ import { connect } from "@/app/lib/mongodb";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
-// ✅ Registration handler
+
 export async function POST(req) {
   try {
     const { nid, name, email, contact, password } = await req.json();
@@ -17,7 +17,7 @@ export async function POST(req) {
 
     const usersCollection = await connect("users");
 
-    // Check if user already exists (by NID or email)
+   
     const existingUser = await usersCollection.findOne({
       $or: [{ nid }, { email }],
     });
@@ -28,10 +28,10 @@ export async function POST(req) {
       );
     }
 
-    // Hash password
+   
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert user
+   
     const result = await usersCollection.insertOne({
       nid,
       name,
@@ -49,15 +49,21 @@ export async function POST(req) {
       },
       { status: 201 }
     );
+
+    
+
+
   } catch (error) {
     return NextResponse.json(
       { success: false, message: "Server error", error: error.message },
       { status: 500 }
     );
   }
+  
+
 }
 
-// ✅ Caretaker fetch handler
+
 export async function GET() {
   try {
     const caretakerCollection = await connect("caretaker");
@@ -77,3 +83,5 @@ export async function GET() {
     );
   }
 }
+
+

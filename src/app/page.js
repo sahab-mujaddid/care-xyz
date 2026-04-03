@@ -15,15 +15,16 @@ export default function Home() {
 
   <div className=" mx-auto">
     
-        We believe care is more than a service—it’s a commitment to trust, compassion, 
-        and reliability. Our mission is to connect families and individuals with 
-        dedicated caretakers who bring both skill and heart to their work.
-        We started with a simple vision: to make finding the right caretaker easier, 
-        safer, and more transparent. Today, our platform empowers clients to browse 
-        verified profiles, check availability, and book with confidence—all in just 
-        a few clicks.Behind every caretaker is a story of dedication, and behind every booking is 
-        our promise to deliver peace of mind. Whether you need daily assistance, 
-        specialized support, or occasional help, we’re here to ensure you always feel cared for.
+       We believe care is more than a service—it’s a commitment to trust, 
+       compassion, and reliability. Our mission is to connect families and 
+       individuals with dedicated services that bring both skill and heart 
+       to their work. We started with a simple vision: to make finding the 
+       right service easier, safer, and more transparent. Today, our platform 
+       empowers clients to browse verified profiles, check availability, and book 
+       with confidence—all in just a few clicks. Behind every service is a story 
+       of dedication, and behind every booking is our promise to deliver peace of mind. 
+       Whether you need daily assistance, specialized support, or occasional help, 
+       we’re here to ensure you always feel cared for.
       
     
   </div>

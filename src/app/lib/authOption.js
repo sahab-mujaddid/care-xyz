@@ -18,15 +18,15 @@ export const authOptions = {
       async authorize(credentials) {
         const usersCollection = await connect("users");
 
-        // Find user by email
+     
         const user = await usersCollection.findOne({ email: credentials.email });
         if (!user) return null;
 
-        // Compare password with hashed password in DB
+      
         const isValid = await bcrypt.compare(credentials.password, user.password);
         if (!isValid) return null;
 
-        // Return user object for session
+        
         return {
           id: user._id.toString(),
           name: user.name,
